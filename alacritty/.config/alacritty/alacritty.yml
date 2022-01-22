@@ -735,8 +735,9 @@ live_config_reload: true
 #   - (Windows) powershell
 shell:
  program: /usr/bin/fish
-#  args:
-#    - --login
+ args:
+   - -l
+   - -i
 
 # Startup directory
 #
