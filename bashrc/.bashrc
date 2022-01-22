@@ -222,3 +222,6 @@ stowth() {
 unstow() {
     stow -vDt ~ $1
 }
+
+# === Starship ===
+eval "$(starship init bash)"
