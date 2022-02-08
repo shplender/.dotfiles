@@ -100,7 +100,7 @@ alias more=less
 alias l.='ls -d .* --color=auto'    # display hidden directories
 alias ll='ls -lh --color=auto'       # display a long-format directory listing
 alias vi='nvim'
-alias backup='rsync -av --delete ~/.bashrc ~/.dotfiles ~/.config/nvim ~/.vimrc /media/storage/backup'
+alias backup='rsync -av --delete ~/.dotfiles /media/storage/backup'
 alias '?'=duck
 alias '??'=google
 #alias info='info --vi-keys'
@@ -160,10 +160,10 @@ ex ()
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export HISTCONTROL=ignoredups:erasedups
 export HISTSIZE=5000
-export EDITOR=vim
-#export EDITOR=emacs
-export VISUAL=vim
-#export VISUAL=emacs
+# export EDITOR=nvim
+export EDITOR="emacsclient -c -a ''"
+# export VISUAL=nvim
+export VISUAL='emacsclient -c -a emacs'
 export MANPAGER="nvim -c 'set ft=man' -"
 #
 #
@@ -222,6 +222,13 @@ stowth() {
 unstow() {
     stow -vDt ~ $1
 }
+
+# mansearch
+# fman() {
+#     man -k . | fzf -q "$1" --prompt='man> '  --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
+# }
+# # Get the colors in the opened man page itself
+# export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
 # === Starship ===
 eval "$(starship init bash)"
