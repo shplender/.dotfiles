@@ -19,13 +19,15 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Hack" :size 20 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Hack" :size 20)
-      doom-unicode-font (font-spec :family "Hack" :size 20 :weight 'regular))
+(setq doom-font (font-spec :family "Hack NF" :size 20 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Hack NF" :size 20)
+      doom-unicode-font doom-font)
+;; doom-unicode-font (font-spec :family "Hack" :size 20 :weight 'regular)
 (custom-set-faces!
   '(fixed-pitch-serif :family "Hack" :size 18 :bold t :foreground "#00f5ff")
   '(font-lock-comment-face :foreground "dark gray" :slant italic)
-  '(hl-line (t :background "#000000")))
+  '(hl-line (t :background "#000000"))
+  '(show-paren-match :background "green"))
 (setq org-hide-emphasis-markers t)
 
 
