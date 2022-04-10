@@ -232,3 +232,5 @@ unstow() {
 
 # === Starship ===
 eval "$(starship init bash)"
+
+# test magit ssh connection
