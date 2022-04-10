@@ -164,7 +164,7 @@ export HISTSIZE=5000
 export EDITOR="emacsclient -c -a ''"
 # export VISUAL=nvim
 export VISUAL='emacsclient -c -a emacs'
-export MANPAGER="nvim -c 'set ft=man' -"
+# export MANPAGER="nvim -c 'set ft=man' -"
 #
 #
 #

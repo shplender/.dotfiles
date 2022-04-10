@@ -24,10 +24,10 @@
       doom-unicode-font doom-font)
 ;; doom-unicode-font (font-spec :family "Hack" :size 20 :weight 'regular)
 (custom-set-faces!
-  '(fixed-pitch-serif :family "Hack" :size 18 :bold t :foreground "#00f5ff")
+  '(fixed-pitch-serif :family "Hack NF" :size 18 :bold t :foreground "#00f5ff")
   '(font-lock-comment-face :foreground "dark gray" :slant italic)
   '(hl-line (t :background "#000000"))
-  '(show-paren-match :background "green"))
+  '(show-paren-match :foreground "green" :slant italic))
 (setq org-hide-emphasis-markers t)
 
 
@@ -78,16 +78,16 @@
 ;; they are implemented.
 
 ;; ==== beacon settings {{{ ====
-(use-package beacon)
-(beacon-mode t)
-(setq beacon-color "#ff8c00")
-(setq beacon-size 50)
-(setq beacon-blink-delay 0.3)
-(setq beacon-blink-when-focused t)
-(setq beacon-blink-when-point-moves-horizontally 30)
-(setq beacon-blink-when-point-moves-vertically 10)
-(setq beacon-blink-when-buffer-changes t)
-(setq beacon-blink-duration 0.3)
+;; (use-package beacon)
+;; (beacon-mode t)
+;; (setq beacon-color "#ff8c00")
+;; (setq beacon-size 50)
+;; (setq beacon-blink-delay 0.3)
+;; (setq beacon-blink-when-focused t)
+;; (setq beacon-blink-when-point-moves-horizontally 30)
+;; (setq beacon-blink-when-point-moves-vertically 10)
+;; (setq beacon-blink-when-buffer-changes t)
+;; (setq beacon-blink-duration 0.3)
 ;; ==== end beacon settings }}} ====
 
 
@@ -117,3 +117,16 @@
 ;; To turn it off only locally, you can insert this:
 ;;
 ;; # -*- buffer-auto-save-file-name: nil; -*-
+(setq python-shell-completion-native-disabled-interpreters '("python3"))
+
+;; HACK: fix python f-strings + smartparens
+(after! smartparens
+  (sp-local-pair '(python-mode) "f\"" "\"")
+  (sp-local-pair '(python-mode) "f'" "'"))
+
+
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
