@@ -101,8 +101,6 @@ alias l.='ls -d .* --color=auto'    # display hidden directories
 alias ll='ls -lh --color=auto'       # display a long-format directory listing
 alias vi='nvim'
 alias backup='rsync -av --delete ~/.dotfiles /media/storage/backup'
-alias '?'=duck
-alias '??'=google
 #alias info='info --vi-keys'
 alias rm='rm -iv'
 alias mv='mv -iv'
