@@ -8,11 +8,6 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
-;; (package! beacon)
-(package! pydoc)
-;; (package! python-info)
-(package! tree-sitter)
-(package! tree-sitter-langs)
 (package! ssh-agency)
 
 ;; To install a package directly from a remote git repo, you must specify a

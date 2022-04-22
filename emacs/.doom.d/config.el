@@ -5,20 +5,25 @@
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Ivan Lomakin"
-      user-mail-address "shplender77@gmail.com")
+;; clients, file templates and snippets. It is optional.
+(setq user-full-name "John Doe"
+      user-mail-address "john@doe.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
+;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;; - `doom-font' -- the primary font to use
+;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
+;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
+;; See 'C-h v doom-font' for documentation and more examples of what they
+;; accept. For example:
+;;
+;; (setq doom-font (font-spec :family "Source Code Pro" :size 18 :weight 'regular)
+     ;; doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
 (setq doom-font (font-spec :family "Hack NF" :size 20 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Hack NF" :size 20)
       doom-unicode-font doom-font)
@@ -30,11 +35,20 @@
   '(show-paren-match :foreground "green" :slant italic))
 (setq org-hide-emphasis-markers t)
 
+;;
+;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; refresh your font settings. If Emacs still can't find your font, it likely
+;; wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-tomorrow-night)
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -50,17 +64,20 @@
 ;;        ))
 
 
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
-;; emacs maximized.
-
-(add-to-list 'initial-frame-alist '(fullscreen . maximized)
-             'default-frame-alist '(fullscreen . maximized))
-
-;; Here are some additional functions/macros that could help you configure Doom:
+;; Whenever you reconfigure a package, make sure to wrap your config in an
+;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
+;;
+;;   (after! PACKAGE
+;;     (setq x y))
+;;
+;; The exceptions to this rule:
+;;
+;;   - Setting file/directory variables (like `org-directory')
+;;   - Setting variables which explicitly tell you to set them before their
+;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
+;;   - Setting doom variables (which start with 'doom-' or '+').
+;;
+;; Here are some additional functions/macros that will help you configure Doom.
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
@@ -73,60 +90,17 @@
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
+;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
+;; etc).
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; ==== beacon settings {{{ ====
-;; (use-package beacon)
-;; (beacon-mode t)
-;; (setq beacon-color "#ff8c00")
-;; (setq beacon-size 50)
-;; (setq beacon-blink-delay 0.3)
-;; (setq beacon-blink-when-focused t)
-;; (setq beacon-blink-when-point-moves-horizontally 30)
-;; (setq beacon-blink-when-point-moves-vertically 10)
-;; (setq beacon-blink-when-buffer-changes t)
-;; (setq beacon-blink-duration 0.3)
-;; ==== end beacon settings }}} ====
+;; start emacs maximized.
 
+(add-to-list 'initial-frame-alist '(fullscreen . maximized)
+             'default-frame-alist '(fullscreen . maximized))
 
 ;; ==== Transparency ====
 ;; (set-frame-parameter (selected-frame) 'alpha  90)
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 90)))
-
-;; ==== Evil googles ==== not working yet/ didn't figure it out yet.
-;; (after! evil-goggles
-;;   (setq evil-goggles-pulse t)
-;;   '(evil-goggles-default-face ((t (:inherit 'popup-menu-mouse-face)))))
-;;
-;;==== Encryption ====
-(require 'org-crypt)
-(org-crypt-use-before-save-magic)
-(setq org-tags-exclude-from-inheritance '("crypt"))
-
-(setq org-crypt-key nil)
-;; GPG key to use for encryption
-;; Either the Key ID or set to nil to use symmetric encryption.
-
-;; (setq auto-save-default nil)
-;; Auto-saving does not cooperate with org-crypt.el: so you need to
-;; turn it off if you plan to use org-crypt.el quite often.  Otherwise,
-;; you'll get an (annoying) message each time you start Org.
-
-;; To turn it off only locally, you can insert this:
-;;
-;; # -*- buffer-auto-save-file-name: nil; -*-
-(setq python-shell-completion-native-disabled-interpreters '("python3"))
-
-;; HACK: fix python f-strings + smartparens
-(after! smartparens
-  (sp-local-pair '(python-mode) "f\"" "\"")
-  (sp-local-pair '(python-mode) "f'" "'"))
-
-
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
