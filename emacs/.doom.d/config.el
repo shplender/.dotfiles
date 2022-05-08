@@ -24,12 +24,12 @@
 ;; (setq doom-font (font-spec :family "Source Code Pro" :size 18 :weight 'regular)
      ;; doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 
-(setq doom-font (font-spec :family "Hack NF" :size 20 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Hack NF" :size 20)
+(setq doom-font (font-spec :family "Comic Code Ligatures" :size 20 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Comic Code Ligatures" :size 20)
       doom-unicode-font doom-font)
 ;; doom-unicode-font (font-spec :family "Hack" :size 20 :weight 'regular)
 (custom-set-faces!
-  '(fixed-pitch-serif :family "Hack NF" :size 18 :bold t :foreground "#00f5ff")
+  '(fixed-pitch-serif :family "Comic Code Ligatures" :size 18 :bold t :foreground "#00f5ff")
   '(font-lock-comment-face :foreground "dark gray" :slant italic)
   '(hl-line (t :background "#000000"))
   '(show-paren-match :foreground "green" :slant italic))
@@ -104,3 +104,4 @@
 ;; ==== Transparency ====
 ;; (set-frame-parameter (selected-frame) 'alpha  90)
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 90)))
+
