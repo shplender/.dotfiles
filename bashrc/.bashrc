@@ -230,4 +230,3 @@ unstow() {
 
 # === Starship ===
 eval "$(starship init bash)"
-

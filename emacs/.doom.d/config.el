@@ -105,3 +105,6 @@
 ;; (set-frame-parameter (selected-frame) 'alpha  90)
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 90)))
 
+(require 'flyspell-correct-ivy)
+(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
+
