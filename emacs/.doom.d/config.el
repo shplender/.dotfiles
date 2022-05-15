@@ -108,3 +108,9 @@
 (require 'flyspell-correct-ivy)
 (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
 
+(defun cl-doc ()
+  (interactive)
+  (setq-local dash-docs-docsets '(Common Lisp)))
+
+(add-hook 'common-lisp-mode 'cl-doc)
+(add-hook 'common-lisp-mode (lambda () (setq-local counsel-dash-docsets '("Common Lisp"))))
