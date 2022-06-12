@@ -101,6 +101,7 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized)
              'default-frame-alist '(fullscreen . maximized))
 
+(setq fancy-splash-image "/home/ivan/Pictures/dragon.png")
 ;; ==== Transparency ====
 ;; (set-frame-parameter (selected-frame) 'alpha  90)
 ;; (add-to-list 'default-frame-alist '(alpha . (92 . 90)))
@@ -108,9 +109,10 @@
 (require 'flyspell-correct-ivy)
 (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
 
-(defun cl-doc ()
-  (interactive)
-  (setq-local dash-docs-docsets '(Common Lisp)))
 
-(add-hook 'common-lisp-mode 'cl-doc)
-(add-hook 'common-lisp-mode (lambda () (setq-local counsel-dash-docsets '("Common Lisp"))))
+(defun common-lisp-doc ()
+  (interactive)
+  (setq-local dash-docs-docsets '("Common Lisp"))
+  (setq dash-docs-enable-debugging nil))
+
+(vimish-fold-global-mode 1)
