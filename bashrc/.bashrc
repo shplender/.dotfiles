@@ -1,4 +1,4 @@
-#
+#!/usr/bin/env bash
 # ~/.bashrc
 #
 
@@ -24,8 +24,8 @@ colors() {
 
 			seq0="${vals:+\e[${vals}m}"
 			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+			printf " %sTEXT\e[m" "${seq0}"
+			printf " \e[%s1mBOLD\e[m" ${vals:+${vals+$vals;}}
 		done
 		echo; echo
 	done
@@ -189,7 +189,7 @@ tldr --random-example
 
 # for Emacs vterm.
 vterm_printf(){
-    if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
+    if [ -n "$TMUX" ] && { [ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]; }; then
         # Tell tmux to pass the escape sequences through
         printf "\ePtmux;\e\e]%s\007\e\\" "$1"
     elif [ "${TERM%%-*}" = "screen" ]; then
@@ -214,11 +214,11 @@ PS1=$PS1'\[$(vterm_prompt_end)\]'
 
 # stow
 stowth() {
-    stow -vSt ~ $1
+    stow -vSt ~"$1"
 }
 
 unstow() {
-    stow -vDt ~ $1
+    stow -vDt ~ "$1"
 }
 
 # mansearch
@@ -231,4 +231,4 @@ unstow() {
 # === Starship ===
 eval "$(starship init bash)"
 
-echo "Did you know that:"; whatis $(ls /bin | shuf -n 1)
+echo "Did you know that:"; whatis "$(ls /bin | shuf -n 1)"
